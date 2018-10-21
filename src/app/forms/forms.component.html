@@ -1,0 +1,236 @@
+<div class="container">
+  <div class="well well-sm">
+    <label>New Loan Application</label>
+  </div>
+  <form [formGroup]="addForm" (submit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label>Enter Pledge No
+          <sup>*</sup>
+        </label>
+        <input formControlName="pledgeNoIndex" type="text" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['pledgeNoIndex'].invalid) || (addForm['controls']['pledgeNoIndex'].touched && addForm['controls']['pledgeNoIndex'].invalid)">
+          <small class="input-error">Required Field
+          </small>
+        </span>
+      </div>
+      <div class="form-group col-md-5">
+        <input formControlName="pledgeNoValue" class="form-control top-rem">
+        <span *ngIf="(formSubmitted && addForm['controls']['pledgeNoValue'].invalid) || (addForm['controls']['pledgeNoValue'].touched && addForm['controls']['pledgeNoValue'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-5">
+        <select formControlName="settlementDetails" class="form-control top-rem">
+          <option value="View Settlement Details">View Settlement Details</option>
+        </select>
+      </div>
+    </div>
+    <!-- Table Start -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Item Count</th>
+          <th>Deduction Name</th>
+          <th>Gross Wt</th>
+          <th>Stone Wt</th>
+          <th>Std Wt</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="itemsTable" *ngFor="let itemsTable of itemsTable.controls;let i =index;">
+        <tr [formGroupName]="i">
+          <td>
+            <input class="form-control" formControlName="itemName">
+          </td>
+          <td>
+            <input class="form-control" formControlName="ItemCount">
+          </td>
+          <td>
+            <input class="form-control" formControlName="deductionName">
+          </td>
+          <td>
+            <input class="form-control" formControlName="grossWt">
+          </td>
+          <td>
+            <input class="form-control" formControlName="stoneWt">
+          </td>
+          <td>
+            <input class="form-control" formControlName="stdWt">
+          </td>
+          <td>
+            <input class="form-control" formControlName="remarks">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="addItem()" class="btn btn-info">Add Items</button>
+    <br/>
+    <br/>
+    <br/>
+    <!-- Table End -->
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label>Total Piece
+          <sup>*</sup>
+        </label>
+        <input formControlName="totalPiece" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['totalPiece'].invalid) || (addForm['controls']['totalPiece'].touched && addForm['controls']['totalPiece'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-2">
+        <label>Total Gross
+          <sup>*</sup>
+        </label>
+        <input formControlName="totalGross" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['totalGross'].invalid) || (addForm['controls']['totalGross'].touched && addForm['controls']['totalGross'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-2">
+        <label>Total Stone
+          <sup>*</sup>
+        </label>
+        <input formControlName="totalStone" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['totalStone'].invalid) || (addForm['controls']['totalStone'].touched && addForm['controls']['totalStone'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Total Net Wt
+          <sup>*</sup>
+        </label>
+        <input formControlName="totalNet" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['totalNet'].invalid) || (addForm['controls']['totalNet'].touched && addForm['controls']['totalNet'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Total Net Wt short Scheme
+          <sup>*</sup>
+        </label>
+        <input formControlName="totalNetScheme" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['totalNetScheme'].invalid) || (addForm['controls']['totalNetScheme'].touched && addForm['controls']['totalNetScheme'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-5">
+        <label>Select Inventory</label>
+        <select formControlName="inventory" class="form-control">
+          <option value="Swarna Mithra">Swarna Mithra</option>
+        </select>
+      </div>
+      <div class="form-group col-md-5">
+        <label class="brand">New Brand name for scheme (Circular 3212)</label>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Scheme</th>
+          <th>Lend Rate</th>
+          <th>Duration</th>
+          <th>Interest</th>
+          <th>Loan Value</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PL-PL</td>
+          <td>2015</td>
+          <td>90</td>
+          <td>20.00%</td>
+          <td>17300.00</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label>Settlement Value
+          <sup>*</sup>
+        </label>
+        <input formControlName="settletementValue" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['settletementValue'].invalid) || (addForm['controls']['settletementValue'].touched && addForm['controls']['settletementValue'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Eligible Loan
+          <sup>*</sup>
+        </label>
+        <input formControlName="eligibleValue" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['eligibleValue'].invalid) || (addForm['controls']['eligibleValue'].touched && addForm['controls']['eligibleValue'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Enter Pledge Value
+          <sup>*</sup>
+        </label>
+        <input formControlName="pledgeValue" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['pledgeValue'].invalid) || (addForm['controls']['pledgeValue'].touched && addForm['controls']['pledgeValue'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Net Amt Receivable
+          <sup>*</sup>
+        </label>
+        <input formControlName="netAmount" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['netAmount'].invalid) || (addForm['controls']['netAmount'].touched && addForm['controls']['netAmount'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Customer Name
+          <sup>*</sup>
+        </label>
+        <input formControlName="customerName" class="form-control">
+        <span *ngIf="(formSubmitted && addForm['controls']['customerName'].invalid) || (addForm['controls']['customerName'].touched && addForm['controls']['customerName'].invalid)">
+          <small class="input-error">Required Field</small>
+        </span>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Purpose of Loan</label>
+        <select formControlName="purpose" class="form-control">
+          <option value="Auto Loan">Auto Loan</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <div class="form-check">
+          <input formControlName="paymentTneft" class="form-check-input" type="checkbox">
+          <label class="form-check-label">
+            Payment through NEFT
+          </label>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="form-check">
+          <input formControlName="paymentTcash" class="form-check-input" type="checkbox">
+          <label class="form-check-label">
+            Payment through NEFT/CASH
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <span *ngIf="(formSubmitted && addForm['controls']['paymentTneft'].invalid) || (addForm['controls']['paymentTneft'].invalid)">
+          <small class="input-error">{{addForm['controls']['paymentTneft'].errors ? addForm['controls']['paymentTneft'].errors.message : ''}}</small>
+        </span>
+      </div>
+    </div>
+    <button type="button" (click)="resetForm()" class="btn btn-danger form-btn">Exit</button>
+    <button type="submit" class="btn btn-info form-btn">Save</button>
+  </form>
+</div>
